@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Learning Platform</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Add smooth scroll behavior -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .logo img {
+            height: 120px; /* Adjust height as needed */
+            width: auto;
+            margin-left: -100px; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="/images/learnflow.jpg" alt="Learning Platform Logo"> <!-- Update with your logo path -->
+                </a>
+            </div>
+            <ul class="nav-links">
+                <h1>Learning Platform</h1>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#courses">Courses</a></li> <!-- Updated to scroll to the courses section -->
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/signup.html" class="btn-signup">Sign Up</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Unlock Your Potential</h1>
+            <p>Experience personalized learning tailored to your style. Hands-on, project-based, and peer-to-peer mentorship at every step.</p>
+            <a href="login.html" class="btn-main">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section id="courses">
+        <div class="container">
+            <h2>Explore Our Courses</h2>
+            <div class="course-grid">
+                <div class="course-card" onclick="window.location.href='html_course.html'">
+                    <img src="/images/html.png" alt="HTML Course">
+                    <h3>HTML</h3>
+                    <p>Master the basics of web development and start building websites today.</p>
+                </div>
+                <div class="course-card" onclick="window.location.href='css_course.html'">
+                    <img src="/images/css.png" alt="CSS Course">
+                    <h3>CSS</h3>
+                    <p>Learn to style web pages with CSS, from simple colors to layout design.</p>
+                </div>
+                <div class="course-card" onclick="window.location.href='javascript_course.html'">
+                    <img src="/images/js.png" alt="JavaScript Course">
+                    <h3>JavaScript</h3>
+                    <p>Take your skills to the next level with interactive and dynamic web applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container1">
+            <p>&copy; 2024 Personalized Learning Platform. All rights reserved.</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>

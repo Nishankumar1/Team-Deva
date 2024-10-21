@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000; /* Set background to black */
+            margin: 0;
+            padding: 0;
+            color: #ffffff; /* Set text color to white */
+        }
+
+        .navbar {
+            background-color: #1a1a1a; /* Darker background for the navbar */
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: #00ff00; /* Green navbar text */
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #111111; /* Slightly lighter black for the container */
+            border-radius: 15px;
+            color: #ffffff;
+        }
+
+        .welcome-message h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 32px;
+            color: #00ff00; /* Green heading */
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #1a1a1a; /* Darker black for sections */
+            border-radius: 10px;
+        }
+
+        .button {
+            background-color: #00ff00; /* Green buttons */
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #33ff33; /* Slightly brighter green on hover */
+        }
+
+        .completed {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .pdf-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .progress-bar-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #333333; /* Dark gray progress bar */
+            border-radius: 10px;
+            height: 30px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #00ff00; /* Green progress fill */
+            width: 0%;
+            transition: width 0.5s ease; /* Smooth transition */
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #ffffff; /* White text */
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        
+        .learning-style {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #00ff00; /* Green learning style text */
+        }
+
+        .peer-suggestions ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .peer-suggestions ul li {
+            background-color: #111111;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none; /* CSS class for hidden elements */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">User Dashboard</div>
+
+    <div class="container">
+        <div class="welcome-message">
+            <h1>Welcome to Your Learning Dashboard!</h1>
+        </div>
+
+        <div class="learning-style" id="learningStyle"></div>
+
+        <!-- Peer Learning Suggestions Section -->
+        <div class="section peer-suggestions" id="peerSuggestionsExistingUserSection">
+            <h2>Peer Learning Suggestions</h2>
+            <ul id="peerSuggestionsExistingUserList"></ul>
+        </div>
+
+        <!-- Progress Bar Section -->
+        <div class="section">
+            <h2>Course Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div id="progressBarFill" class="progress-bar-fill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Progress: 0%</div>
+            </div>
+        </div>
+
+        <!-- Levels List -->
+        <div class="section">
+            <h2>HTML Learning Levels</h2>
+            <div>
+                <button class="button" id="openPdfBtn1">Open Level 1 PDF</button>
+                <span id="level1Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn2">Open Level 2 PDF</button>
+                <span id="level2Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn3">Open Level 3 PDF</button>
+                <span id="level3Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn4">Open Level 4 PDF</button>
+                <span id="level4Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn5">Open Level 5 PDF</button>
+                <span id="level5Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn6">Open Level 6 PDF</button>
+                <span id="level6Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn7">Open Level 7 PDF</button>
+                <span id="level7Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn8">Open Level 8 PDF</button>
+                <span id="level8Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn9">Open Level 9 PDF</button>
+                <span id="level9Status"></span>
+            </div>
+            <div>
+                <button class="button hidden" id="openPdfBtn10">Open Level 10 PDF</button>
+                <span id="level10Status"></span>
+            </div>
+
+            <!-- PDF Display -->
+            <div class="pdf-container" id="pdfContainer">
+                <iframe id="pdfViewer" src=""></iframe>
+            </div>
+            <button class="button hidden" id="closePdfBtn">Close PDF</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/user-data') // Endpoint to get user data
+                .then(response => response.json())
+                .then(userData => {
+                    // Display dynamic learning style
+                    document.getElementById('learningStyle').textContent = `Your Learning Style: ${userData.learningStyle}`;
+                    
+                    // Set initial progress
+                    let progress = userData.completionPercentage;
+                    const progressBarFill = document.getElementById('progressBarFill');
+                    const progressText = document.getElementById('progressText');
+
+                    function updateProgressBar() {
+                        progressBarFill.style.width = progress + '%';
+                        progressText.textContent = 'Progress: ' + progress + '%';
+                    }
+
+                    // Mark completed levels based on user data
+                    userData.completedLevels.forEach(level => {
+                        document.getElementById(`level${level}Status`).innerHTML = "<span class='completed'>Completed</span>";
+                        if (level < 10) {
+                            document.getElementById(`openPdfBtn${level + 1}`).classList.remove('hidden'); // Show next level button
+                        }
+                    });
+
+                    updateProgressBar(); // Update progress bar initially
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+
+            // Fetch peer learning suggestions for existing users
+            fetch('/api/existing-user-data') // API endpoint for existing user peer suggestions
+                .then(response => response.json())
+                .then(existingUserData => {
+                    const peerSuggestionsList = document.getElementById('peerSuggestionsExistingUserList');
+                    
+                    existingUserData.peerSuggestions.forEach(suggestion => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = suggestion;
+                        peerSuggestionsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching peer learning suggestions:', error));
+
+            const pdfContainer = document.getElementById('pdfContainer');
+            const closePdfBtn = document.getElementById('closePdfBtn');
+
+            function openPdf(level) {
+                pdfContainer.style.display = 'block';
+                document.getElementById('pdfViewer').src = `/public/pdfs/html_level_${level}.pdf`; // Ensure this path is correct
+                closePdfBtn.classList.remove('hidden');
+            }
+
+            function completeLevel(level) {
+                document.getElementById(`level${level}Status`).innerHTML = "<span class='completed'>Completed</span>";
+                if (level < 10) {
+                    document.getElementById(`openPdfBtn${level + 1}`).classList.remove('hidden'); // Show next level button
+                }
+            }
+
+            document.getElementById('openPdfBtn1').addEventListener('click', function() {
+                openPdf(1);
+                completeLevel(1);
+            });
+
+            document.getElementById('openPdfBtn2').addEventListener('click', function() {
+                openPdf(2);
+                completeLevel(2);
+            });
+
+            document.getElementById('openPdfBtn3').addEventListener('click', function() {
+                openPdf(3);
+                completeLevel(3);
+            });
+
+            document.getElementById('openPdfBtn4').addEventListener('click', function() {
+                openPdf(4);
+                completeLevel(4);
+            });
+
+            document.getElementById('openPdfBtn5').addEventListener('click', function() {
+                openPdf(5);
+                completeLevel(5);
+            });
+
+            document.getElementById('openPdfBtn6').addEventListener('click', function() {
+                openPdf(6);
+                completeLevel(6);
+            });
+
+            document.getElementById('openPdfBtn7').addEventListener('click', function() {
+                openPdf(7);
+                completeLevel(7);
+            });
+
+            document.getElementById('openPdfBtn8').addEventListener('click', function() {
+                openPdf(8);
+                completeLevel(8);
+            });
+
+            document.getElementById('openPdfBtn9').addEventListener('click', function() {
+                openPdf(9);
+                completeLevel(9);
+            });
+
+            document.getElementById('openPdfBtn10').addEventListener('click', function() {
+                openPdf(10);
+                completeLevel(10);
+            });
+
+            closePdfBtn.addEventListener('click', function() {
+                pdfContainer.style.display = 'none';
+                document.getElementById('pdfViewer').src = ''; // Reset the PDF source
+                closePdfBtn.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

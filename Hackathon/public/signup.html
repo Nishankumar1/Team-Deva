@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Personalized Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Full CSS for Signup Page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: url('public/images/signup-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .form-container {
+            z-index: 2;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 15px 0 5px;
+            text-align: left;
+            font-size: 1.2rem;
+            color: #f2f2f2;
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .form-container input:focus, .form-container select:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-main {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            background-color: #00c853;
+            color: #fff;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-main:hover {
+            background-color: #00b74a;
+        }
+
+        .form-container p {
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .form-container p a {
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-container p a:hover {
+            text-decoration: underline;
+        }
+        .form-container option{
+            color: black;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="form-container">
+        <h2>Create Your Account</h2>
+        <form action="/signup" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="learningStyle">Learning Style</label>
+            <select id="learningStyle" name="learningStyle">
+                <option value="Visual">Visual</option>
+                <option value="Auditory">Auditory</option>
+                <option value="Kinesthetic">Kinesthetic</option>
+                <option value="document">Document Learner</option>
+                <option value="Know">Know Your Learning Style</option>
+            </select>
+
+            <button type="submit" class="btn-main">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Personalized Learning Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Personalized Learning Platform</title>
+    <link rel="stylesheet" href="public/css/styles.css"> <!-- Link to external CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2e2b2b; /* Dark background */
+            color: #00ff00; /* Green font color */
+        }
+        header {
+            background-color: #333; /* Dark header */
+            color: #00ff00; /* Green font color */
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            position: relative;
+            color: #00ff00; /* Green font color */
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: #00ff00; /* Green underline */
+            margin: 10px auto;
+        }
+        .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .team-member {
+            background-color: #111; /* Dark background for team member card */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.3); /* Green shadow */
+            margin: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 255, 0, 0.5); /* Brighter green shadow on hover */
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            transition: transform 0.3s;
+        }
+        .team-member:hover img {
+            transform: scale(1.1);
+        }
+        .team-member a {
+            color: aqua;
+        }
+        .team-member h3 {
+            color: #00ff00; /* Green font color */
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+        .team-member p {
+            color: #00ff00;         
+        }
+        .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+        .social-links li {
+            display: inline;
+            margin: 0 10px;
+        }
+        .social-links a {
+            text-decoration: none;
+            color: #00ff00; /* Green link color */
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .social-links a:hover {
+            color: #80ff80; /* Lighter green on hover */
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+        .social-links i {
+            margin-right: 5px; /* Space between icon and text */
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333; /* Dark footer */
+            color: #00ff00; /* Green font color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+    <div class="container">
+        <h2>Meet Our Team</h2>
+        <div class="team">
+            <div class="team-member">
+                <img src="images/nishan2.jpg" alt="Nishan Kumar">
+                <h3>Nishan Kumar</h3>
+                <p>Email: <a href="mailto:nishankumarwrk124@gmail.com"><i class="fas fa-envelope"></i>nishankumarwrk124@gmail.com</a></p>
+                <ul class="social-links">
+                    <li><a href="https://www.linkedin.com/in/member1" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/Nishankumar1" target="_blank"><i class="fab fa-github"></i>GitHub</a></li>
+                </ul>
+            </div>
+            <div class="team-member">
+                <img src="images/raviprakash.jpg" alt="Ravi Prakash">
+                <h3>Raviprakash</h3>
+                <p>Email: <a href="mailto:raviprakash0948@gmail.com"><i class="fas fa-envelope"></i>raviprakash0948@gmail.com</a></p>
+                <ul class="social-links">
+                    <li><a href="https://linkedin.com/in/raviprakash-k-69bb7b259" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/raviprakash-14" target="_blank"><i class="fab fa-github"></i>GitHub</a></li>
+                </ul>
+            </div>
+            <div class="team-member">
+                <img src="images/ankith.jpg" alt="Ankith Kumar">
+                <h3>Ankith Kumar</h3>
+                <p>Email: <a href="mailto:ankithkumar021@gmail.com"><i class="fas fa-envelope"></i>ankithkumar021@gmail.com</a></p>
+                <ul class="social-links">
+                    <li><a href="https://www.linkedin.com/in/ankith-kumar-b56721269" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/member3" target="_blank"><i class="fab fa-github"></i>GitHub</a></li>
+                </ul>
+            </div>
+            <div class="team-member">
+                <img src="images/jayaganesh.jpg" alt="Jayaganesh Bhat">
+                <h3>Jayaganesh Bhat</h3>
+                <p>Email: <a href="mailto:jayaganesh0703@gmail.com"><i class="fas fa-envelope"></i>jayaganesh0703@gmail.com</a></p>
+                <ul class="social-links">
+                    <li><a href="https://linkedin.com/in/jayaganesh-bhat-803695257" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/jayaganeshbhat" target="_blank"><i class="fab fa-github"></i>GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Personalized Learning Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>

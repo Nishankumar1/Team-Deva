@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Learning Style</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+        .question {
+            margin: 15px 0;
+        }
+        .answer {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+            background-color: #e7e7e7;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .answer:hover {
+            background-color: #d0d0d0;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Know Your Learning Style</h1>
+        <div id="quiz">
+            <!-- Questions will be populated here -->
+        </div>
+        <button id="submit">Submit</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "How do you prefer to learn new information?",
+                answers: [
+                    { text: "By listening to lectures or discussions", value: "Auditory" },
+                    { text: "By reading books or articles", value: "Visual" },
+                    { text: "By doing hands-on activities", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "When studying for a test, I prefer to:",
+                answers: [
+                    { text: "Discuss the material with others", value: "Auditory" },
+                    { text: "Use diagrams and charts", value: "Visual" },
+                    { text: "Practice problems or experiments", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "Which of these methods helps you remember things best?",
+                answers: [
+                    { text: "Listening to recordings", value: "Auditory" },
+                    { text: "Visualizing concepts", value: "Visual" },
+                    { text: "Using physical objects", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "When faced with a problem, I prefer to:",
+                answers: [
+                    { text: "Talk it out with someone", value: "Auditory" },
+                    { text: "Draw it out or write it down", value: "Visual" },
+                    { text: "Build a model or prototype", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "During a lecture, I tend to:",
+                answers: [
+                    { text: "Take notes by writing down what I hear", value: "Auditory" },
+                    { text: "Sketch diagrams to understand", value: "Visual" },
+                    { text: "Use my hands to illustrate points", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "When I need to memorize something, I:",
+                answers: [
+                    { text: "Repeat it out loud", value: "Auditory" },
+                    { text: "Write it down several times", value: "Visual" },
+                    { text: "Create a physical activity to remember", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "I find it easier to learn when:",
+                answers: [
+                    { text: "I can listen to an explanation", value: "Auditory" },
+                    { text: "I can see a visual representation", value: "Visual" },
+                    { text: "I can try it out myself", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "Which study environment do you prefer?",
+                answers: [
+                    { text: "Listening to music or discussions", value: "Auditory" },
+                    { text: "A quiet space with visual aids", value: "Visual" },
+                    { text: "An active space where I can move around", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "How do you feel about learning through videos?",
+                answers: [
+                    { text: "I enjoy it and learn a lot", value: "Auditory" },
+                    { text: "I prefer visual explanations", value: "Visual" },
+                    { text: "I like to practice what I see", value: "Kinesthetic" }
+                ]
+            },
+            {
+                question: "When solving a puzzle, I usually:",
+                answers: [
+                    { text: "Talk through my thought process", value: "Auditory" },
+                    { text: "Look for patterns and visual clues", value: "Visual" },
+                    { text: "Manipulate pieces to see how they fit", value: "Kinesthetic" }
+                ]
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz');
+        const resultContainer = document.getElementById('result');
+        const submitButton = document.getElementById('submit');
+
+        questions.forEach((q, index) => {
+            const questionElement = document.createElement('div');
+            questionElement.className = 'question';
+            questionElement.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+            q.answers.forEach(answer => {
+                questionElement.innerHTML += `
+                    <label class="answer">
+                        <input type="radio" name="question${index}" value="${answer.value}">
+                        ${answer.text}
+                    </label>
+                `;
+            });
+            quizContainer.appendChild(questionElement);
+        });
+
+        submitButton.addEventListener('click', async () => {
+            const selectedAnswers = [];
+            questions.forEach((_, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption) {
+                    selectedAnswers.push(selectedOption.value);
+                }
+            });
+
+            if (selectedAnswers.length === 0) {
+                alert('Please select at least one answer per question.');
+                return;
+            }
+
+            const result = analyzeResults(selectedAnswers);
+            resultContainer.innerHTML = `You are a <a href="${getLearningPage(result)}" style="color: blue;">${result} learner</a>.`;
+            resultContainer.style.display = 'block';
+
+            // Update user learning style in the database
+            await updateUserLearningStyle(result);
+        });
+
+        function analyzeResults(answers) {
+            const counts = { Auditory: 0, Visual: 0, Kinesthetic: 0 };
+            answers.forEach(answer => counts[answer]++);
+            return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+        }
+
+        function getLearningPage(style) {
+            switch (style) {
+                case 'Auditory':
+                    return 'audio.html';
+                case 'Visual':
+                    return 'visual.html'; // Replace with the actual visual page
+                case 'Kinesthetic':
+                    return 'kinesthetic.html'; // Replace with the actual kinesthetic page
+                default:
+                    return 'audio.html'; // Default case
+            }
+        }
+
+        async function updateUserLearningStyle(style) {
+            const response = await fetch('/updateLearningStyle', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ learningStyle: style })
+            });
+            if (!response.ok) {
+                console.error('Error updating learning style:', await response.text());
+            }
+        }
+    </script>
+</body>
+</html>
